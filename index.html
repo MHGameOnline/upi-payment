@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enter Amount</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial; text-align: center; padding: 30px; }
+    input, button {
+      width: 80%;
+      padding: 15px;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Enter Payment Amount</h2>
+
+<input type="number" id="amount" placeholder="Enter Amount (₹)" />
+
+<button onclick="goNext()">Pay</button>
+
+<script>
+  function goNext() {
+    var amt = document.getElementById("amount").value;
+    if (!amt || amt <= 0) {
+      alert("Enter valid amount");
+      return;
+    }
+    window.location.href = "select.html?amount=" + amt;
+  }
+</script>
+
+</body>
+</html>
