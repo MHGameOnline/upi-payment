@@ -4,12 +4,30 @@
   <title>Select Payment App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial; text-align: center; padding: 30px; }
-    button {
-      width: 80%;
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+    .app {
+      width: 90%;
+      max-width: 350px;
+      border: 1px solid #ddd;
       padding: 15px;
+      margin: 15px auto;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .app img {
+      width: 40px;
+      height: 40px;
+    }
+    .app span {
       font-size: 18px;
-      margin: 10px 0;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -17,20 +35,50 @@
 
 <h2>Select Payment App</h2>
 
-<button onclick="pay('gpay')">Pay with GPay</button>
-<button onclick="pay('phonepe')">Pay with PhonePe</button>
-<button onclick="pay('paytm')">Pay with Paytm</button>
+<div class="app" onclick="payGPay()">
+  <img src="gpay.png" alt="GPay">
+  <span>Pay with Google Pay</span>
+</div>
+
+<div class="app" onclick="payPhonePe()">
+  <img src="phonepe.png" alt="PhonePe">
+  <span>Pay with PhonePe</span>
+</div>
+
+<div class="app" onclick="payPaytm()">
+  <img src="paytm.png" alt="Paytm">
+  <span>Pay with Paytm</span>
+</div>
 
 <script>
   const params = new URLSearchParams(window.location.search);
   const amount = params.get("amount");
 
-  const upiId = "9172990113@ybl";   // CHANGE THIS
-  const name = "Mahendra";
+  const upiId = "yourupi@bank";   // CHANGE
+  const name = "Your Name";       // CHANGE
 
-  function pay(app) {
+  function payGPay() {
     let url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
     window.location.href = url;
+  }
+
+  function payPhonePe() {
+    let url = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+    fallback(url);
+  }
+
+  function payPaytm() {
+    let url = `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+    fallback(url);
+  }
+
+  function fallback(appUrl) {
+    window.location.href = appUrl;
+    setTimeout(() => {
+      // fallback to generic UPI
+      window.location.href =
+        `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+    }, 800);
   }
 </script>
 
