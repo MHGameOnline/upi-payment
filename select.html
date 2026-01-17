@@ -54,8 +54,8 @@
   const params = new URLSearchParams(window.location.search);
   const amount = params.get("amount");
 
-  const upiId = "yourupi@bank";   // CHANGE
-  const name = "Your Name";       // CHANGE
+  const upiId = "9172990113@ybl";   // CHANGE
+  const name = "Mahendra";       // CHANGE
 
   function payGPay() {
     let url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
