@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Payment App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial; text-align: center; padding: 30px; }
+    button {
+      width: 80%;
+      padding: 15px;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Select Payment App</h2>
+
+<button onclick="pay('gpay')">Pay with GPay</button>
+<button onclick="pay('phonepe')">Pay with PhonePe</button>
+<button onclick="pay('paytm')">Pay with Paytm</button>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const amount = params.get("amount");
+
+  const upiId = "9172990113@ybl";   // CHANGE THIS
+  const name = "Mahendra";
+
+  function pay(app) {
+    let url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+    window.location.href = url;
+  }
+</script>
+
+</body>
+</html>
