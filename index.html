@@ -4,12 +4,21 @@
   <title>Enter Amount</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial; text-align: center; padding: 30px; }
+    body { 
+      font-family: Arial; 
+      text-align: center; 
+      padding: 30px; 
+    }
     input, button {
       width: 80%;
       padding: 15px;
       font-size: 18px;
       margin-top: 10px;
+    }
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -19,15 +28,24 @@
 
 <input type="number" id="amount" placeholder="Enter Amount (₹)" />
 
+<div class="note">Minimum amount is ₹100</div>
+
 <button onclick="goNext()">Pay</button>
 
 <script>
   function goNext() {
     var amt = document.getElementById("amount").value;
+
     if (!amt || amt <= 0) {
-      alert("Enter valid amount");
+      alert("Please enter a valid amount");
       return;
     }
+
+    if (amt < 100) {
+      alert("Minimum payment amount is ₹100");
+      return;
+    }
+
     window.location.href = "select.html?amount=" + amt;
   }
 </script>
