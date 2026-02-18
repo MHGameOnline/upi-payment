@@ -8,30 +8,51 @@
       font-family: Arial;
       text-align: center;
       padding: 20px;
+      background-color: #FFBB86FC;
     }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 5px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
     .app {
       width: 90%;
       max-width: 350px;
-      border: 1px solid #ddd;
+      background: white;
       padding: 15px;
       margin: 15px auto;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
+
     .app img {
       width: 40px;
       height: 40px;
     }
+
     .app span {
       font-size: 18px;
       font-weight: bold;
+      color: #000;
     }
   </style>
 </head>
+
 <body>
+
+<img src="logo.jpeg" class="logo">
+<div class="brand">|| Shree Balaji ||</div>
 
 <h2>Select Payment App</h2>
 
@@ -54,8 +75,8 @@
   const params = new URLSearchParams(window.location.search);
   const amount = params.get("amount");
 
-  const upiId = "9172990113@ybl";   // CHANGE
-  const name = "Mahendra";       // CHANGE
+  const upiId = "9172990113@ybl";
+  const name = "Mahendra";
 
   function payGPay() {
     let url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
@@ -75,7 +96,6 @@
   function fallback(appUrl) {
     window.location.href = appUrl;
     setTimeout(() => {
-      // fallback to generic UPI
       window.location.href =
         `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
     }, 800);
