@@ -4,25 +4,64 @@
   <title>Enter Amount</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { 
-      font-family: Arial; 
-      text-align: center; 
-      padding: 30px; 
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 30px;
+      background-color: #FFBB86FC;
     }
-    input, button {
+
+    .logo {
+      width: 120px;
+      margin-bottom: 5px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    input {
       width: 80%;
       padding: 15px;
       font-size: 18px;
       margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
     }
+
     .note {
       font-size: 14px;
-      color: #555;
+      color: #333;
       margin-top: 5px;
+    }
+
+    /* 3D Button */
+    .btn {
+      width: 80%;
+      margin-top: 20px;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      background-color: #FF4081;
+      box-shadow: 0 4px #C2185B;
+      cursor: pointer;
+    }
+
+    .btn:active {
+      box-shadow: 0 2px #C2185B;
+      transform: translateY(2px);
     }
   </style>
 </head>
+
 <body>
+
+<img src="logo.jpeg" class="logo">
+<div class="brand">|| Shree Balaji ||</div>
 
 <h2>Enter Payment Amount</h2>
 
@@ -30,7 +69,7 @@
 
 <div class="note">Minimum amount is ₹100</div>
 
-<button onclick="goNext()">Pay</button>
+<button class="btn" onclick="goNext()">Pay</button>
 
 <script>
   function goNext() {
