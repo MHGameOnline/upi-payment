@@ -48,14 +48,6 @@ box-shadow:0 4px 10px rgba(0,0,0,0.2);
 width:40px;
 }
 
-.qr{
-margin-top:30px;
-}
-
-.qr img{
-width:230px;
-}
-
 </style>
 </head>
 
@@ -71,7 +63,7 @@ Pay ₹ <span id="amount"></span>
 
 <div class="app" onclick="pay()">
 <img src="gpay.png">
-<span>Pay with GPay</span>
+<span>Pay with Google Pay</span>
 </div>
 
 <div class="app" onclick="pay()">
@@ -84,14 +76,6 @@ Pay ₹ <span id="amount"></span>
 <span>Pay with Paytm</span>
 </div>
 
-<div class="qr">
-
-<h3>OR Scan QR</h3>
-
-<img id="qr">
-
-</div>
-
 <script>
 
 const params=new URLSearchParams(window.location.search);
@@ -102,19 +86,12 @@ document.getElementById("amount").innerText=amount;
 const upiId="9172990113@ybl";
 const name="Mahendra";
 
-const upi=`upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+const upiLink=`upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment`;
 
 function pay(){
-
-window.location.href=upi;
-
+window.location.href=upiLink;
 }
 
-/* generate QR automatically */
-
-const qr="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data="+encodeURIComponent(upi);
-
-document.getElementById("qr").src=qr;
 
 </script>
 
