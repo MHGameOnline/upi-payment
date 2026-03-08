@@ -47,6 +47,22 @@ font-size:18px;
 font-weight:bold;
 }
 
+.qrbox{
+margin-top:30px;
+}
+
+.qrbox img{
+width:220px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+
+.qrtext{
+font-size:16px;
+margin-top:10px;
+font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -72,6 +88,20 @@ font-weight:bold;
 <span>Pay with Paytm</span>
 </div>
 
+
+<div class="qrbox">
+
+<h3>OR Scan QR to Pay</h3>
+
+<img src="wallet.jfif">
+
+<div class="qrtext">
+Scan with any UPI app
+</div>
+
+</div>
+
+
 <script>
 
 const params = new URLSearchParams(window.location.search);
@@ -82,33 +112,27 @@ const name = "Mahendra";
 
 function pay(app){
 
-const upiLink =
-`upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment`;
+const upi =
+`upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
 
-let url="";
+let intent="";
 
 if(app==="gpay"){
-
-url=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
-
+intent=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
 }
 
 if(app==="phonepe"){
-
-url=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment#Intent;scheme=upi;package=com.phonepe.app;end`;
-
+intent=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
 }
 
 if(app==="paytm"){
-
-url=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment#Intent;scheme=upi;package=net.one97.paytm;end`;
-
+intent=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR#Intent;scheme=upi;package=net.one97.paytm;end`;
 }
 
-window.location.href=url;
+window.location.href=intent;
 
 setTimeout(()=>{
-window.location.href=upiLink;
+window.location.href=upi;
 },1200);
 
 }
