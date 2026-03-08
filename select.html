@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Select Payment App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding: 20px;
-      background-color: #FFBB86FC;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select Payment App</title>
 
-    .logo {
-      width: 120px;
-      margin-bottom: 5px;
-    }
+<style>
 
-    .brand {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+body{
+font-family: Arial;
+text-align:center;
+background:#FFBB86FC;
+padding:20px;
+}
 
-    .app {
-      width: 90%;
-      max-width: 350px;
-      background: white;
-      padding: 15px;
-      margin: 15px auto;
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
+.logo{
+width:110px;
+margin-bottom:5px;
+}
 
-    .app img {
-      width: 40px;
-      height: 40px;
-    }
+.brand{
+font-size:20px;
+font-weight:bold;
+margin-bottom:20px;
+}
 
-    .app span {
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
-    }
-  </style>
+.app{
+width:90%;
+max-width:360px;
+background:white;
+margin:14px auto;
+padding:15px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:15px;
+cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.app img{
+width:40px;
+}
+
+.app span{
+font-size:18px;
+font-weight:bold;
+}
+
+</style>
 </head>
 
 <body>
@@ -54,52 +55,64 @@
 <img src="logo.jpeg" class="logo">
 <div class="brand">|| Shree Balaji ||</div>
 
-<h2>Select Payment App</h2>
+<h3>Select Payment App</h3>
 
-<div class="app" onclick="payGPay()">
-  <img src="gpay.png" alt="GPay">
-  <span>Pay with Google Pay</span>
+<div class="app" onclick="pay('gpay')">
+<img src="gpay.png">
+<span>Pay with Google Pay</span>
 </div>
 
-<div class="app" onclick="payPhonePe()">
-  <img src="phonepe.png" alt="PhonePe">
-  <span>Pay with PhonePe</span>
+<div class="app" onclick="pay('phonepe')">
+<img src="phonepe.png">
+<span>Pay with PhonePe</span>
 </div>
 
-<div class="app" onclick="payPaytm()">
-  <img src="paytm.png" alt="Paytm">
-  <span>Pay with Paytm</span>
+<div class="app" onclick="pay('paytm')">
+<img src="paytm.png">
+<span>Pay with Paytm</span>
 </div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const amount = params.get("amount");
 
-  const upiId = "9172990113@ybl";
-  const name = "Mahendra";
+const params = new URLSearchParams(window.location.search);
+const amount = params.get("amount");
 
-  function payGPay() {
-    let url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-    window.location.href = url;
-  }
+const upiId = "9172990113@ybl";
+const name = "Mahendra";
 
-  function payPhonePe() {
-    let url = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-    fallback(url);
-  }
+function pay(app){
 
-  function payPaytm() {
-    let url = `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-    fallback(url);
-  }
+const upiLink =
+`upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment`;
 
-  function fallback(appUrl) {
-    window.location.href = appUrl;
-    setTimeout(() => {
-      window.location.href =
-        `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-    }, 800);
-  }
+let url="";
+
+if(app==="gpay"){
+
+url=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+
+}
+
+if(app==="phonepe"){
+
+url=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment#Intent;scheme=upi;package=com.phonepe.app;end`;
+
+}
+
+if(app==="paytm"){
+
+url=`intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=Payment#Intent;scheme=upi;package=net.one97.paytm;end`;
+
+}
+
+window.location.href=url;
+
+setTimeout(()=>{
+window.location.href=upiLink;
+},1200);
+
+}
+
 </script>
 
 </body>
